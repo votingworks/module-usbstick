@@ -1,0 +1,30 @@
+<html>
+  <head><title>Test Page for USB Stick</title></head>
+  <script>
+    function get_status() {
+    fetch('/usbstick/status')
+    .then(function(response) {
+    return response.json();
+    })
+    .then(function(responseJSON) {
+    document.getElementById('result').value=JSON.stringify(responseJSON)
+    })
+    }
+
+    window.setInterval(get_status, 2000)
+
+    function eject() {
+    fetch('/usbstick/eject', {method: 'POST'})
+    }
+  </script>
+  <body>
+    <h1>Test Page for USB Stick</h1>
+    
+    <form>
+      <textarea id="result" style="font-family: monospace;" cols=80>
+      </textarea>
+    </form>
+
+    <button onclick="eject()">eject</button>
+
+  </body>
