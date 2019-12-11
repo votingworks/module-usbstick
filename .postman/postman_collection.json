@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "ff0288f5-ae1f-46dd-ae20-8523b1933593",
+		"name": "VotingWorks USB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Get USB Storage Devices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/usb",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"usb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Mount the Device with the Given Label",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/usb/{{deviceId}}/mount?label={{device_label}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"usb",
+						"{{deviceId}}",
+						"mount"
+					],
+					"query": [
+						{
+							"key": "label",
+							"value": "{{device_label}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Create A Directory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/usb/{{deviceId}}/directory?path={{relative_dir_path}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"usb",
+						"{{deviceId}}",
+						"directory"
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "{{relative_dir_path}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Write Json to Specified File",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "path",
+						"value": "{{relative_file_path}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"some\":\"test\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/usb/{{deviceId}}/file?path={{relative_file_path}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"usb",
+						"{{deviceId}}",
+						"file"
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "{{relative_file_path}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Get Device File From Path",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/usb/{{deviceId}}/file?path={{relative_file_path}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"usb",
+						"{{deviceId}}",
+						"file"
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "{{relative_file_path}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. Unmount the Specified Device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/usb/{{deviceId}}/unmount",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"usb",
+						"{{deviceId}}",
+						"unmount"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

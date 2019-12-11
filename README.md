@@ -1,7 +1,13 @@
 # USB Stick Module
 
 This web server component provides a web interface to simple USB stick
-operations.
+operations on linux.
+
+## Dependencies
+
+```
+sudo apt-get update && sudo apt-get install -y --no-recommends pmount
+```
 
 ## Install Requisite Software
 
@@ -23,18 +29,6 @@ yarn start
 
 ## API Documentation
 
-This scanner module provides the following API:
-
-- `GET /usbstick/status` -- returns whether a USB stick is present or not:
-
-```
-{present: true}
-```
-
-- `POST /usbstick/eject` -- ejects a USB stick if present
-
-```
-{success: true}
-```
+See the included postman collection for a complete list of functions
 
 ## Architecture

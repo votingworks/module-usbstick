@@ -17,6 +17,7 @@ export interface BlockDeviceInfo {
   readonly name: string
   // eslint-disable-next-line no-null/no-null
   readonly mountpoint: string | null
+  readonly type: string
   readonly children?: BlockDeviceInfo[]
 }
 
@@ -91,6 +92,15 @@ app.post('/usbstick/eject', async (_request: Request, response: Response) => {
 app.get('/', (_request: Request, response: Response) => {
   response.sendFile(path.join(__dirname, '..', 'index.html'))
 })
+
+let _ignored = [
+  'device', 
+  'file'
+].map(async name => {
+
+  var controller = require('./controllers/' + name);
+  await controller.setup(app);
+});
 
 export function start() {
   app.listen(port, () => {
