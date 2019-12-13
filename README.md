@@ -27,6 +27,18 @@ yarn test
 yarn start
 ```
 
+## Packaging for release
+
+```
+cd package && ./package.sh
+```
+
+## installing the package into SystemD
+
+```
+cd package && ./install.sh
+```
+
 ## API Documentation
 
 See the included postman collection for a complete list of functions
