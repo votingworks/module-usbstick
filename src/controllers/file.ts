@@ -1,9 +1,10 @@
 import { Application, Request, Response } from 'express'
 import * as path from 'path'
 
-var fs = require('fs')
+import { availableDrives } from './device'
 
-import { availableDrives, UsbDeviceInfo } from './device'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+var fs = require('fs')
 
 const _writeDirectory = (
   deviceId: number,
@@ -63,7 +64,7 @@ const _writeFile = (
   })
 }
 
-export async function setup(app: Application) {
+export default async function setup(app: Application) {
   app.get(
     '/usb/:deviceId/file',
     async (_request: Request, response: Response) => {
@@ -106,7 +107,12 @@ export async function setup(app: Application) {
   app.post(
     '/usb/:deviceId/file',
     async (_request: Request, response: Response) => {
-      let json = JSON.stringify(_request.body, null, 2)
+      const contentType = _request.headers['content-type']
+      let file =
+        contentType === 'application/json'
+          ? // eslint-disable-next-line no-null/no-null
+            JSON.stringify(_request.body, null, 2)
+          : (_request.body as string)
       let deviceId = _request.params.deviceId
 
       var filePath: string =
@@ -114,12 +120,13 @@ export async function setup(app: Application) {
         _request.query.path ||
         new Date().getTime() + '.json'
 
-      const result = await _writeFile(deviceId, filePath, json)
+      const result = await _writeFile(deviceId, filePath, file)
       response.json(result)
     }
   )
 
-  await new Promise<Number>(resolve => resolve(1))
+  await new Promise<number>(resolve => resolve(1))
 
+  // eslint-disable-next-line no-console
   console.log('file controller setup')
 }
