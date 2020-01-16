@@ -64,7 +64,7 @@ const _writeFile = (
   })
 }
 
-export default async function setup(app: Application) {
+export async function setup(app: Application) {
   app.get(
     '/usb/:deviceId/file',
     async (_request: Request, response: Response) => {
